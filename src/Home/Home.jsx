@@ -175,7 +175,7 @@ function Home() {
       }
     }
 
-    setSumarize(sum)
+    setSumarize(sum.toFixed(2))
   }
 
   return(
