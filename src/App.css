@@ -2,6 +2,15 @@
   text-align: center;
 }
 
+body{
+  margin: 0;
+  padding: 2rem;
+  box-sizing: border-box;
+  text-decoration: none;
+  background-image: linear-gradient(to top, #051937, #004b78, #0085a6, #00c0af, #26f994);
+
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
