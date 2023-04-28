@@ -17,6 +17,7 @@ function Home() {
   const [honorary, setHonorary] = useState(0.2)
   const [isLocked, setIsLocked] = useState(true) 
   const [numberOfPagination, setNumberOfPagination] = useState(0)
+  const [sumarize, setSumarize] = useState('')
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -146,7 +147,7 @@ function Home() {
   function nextPage(e){
     if(numberOfPagination<4){
       setNumberOfPagination(numberOfPagination+1)
-
+      setSumarize('')
     }
     
   }
@@ -154,9 +155,27 @@ function Home() {
   function previusPage(e){
     if(numberOfPagination>0){
       setNumberOfPagination(numberOfPagination-1)
+      setSumarize('')
 
     }
     
+  }
+
+  function sumarizeTotal(e){
+    var fields = document.getElementsByClassName('MuiDataGrid-cell')
+    var num
+    var sum = 0
+    for(let i=0;i<fields.length;i++){
+      if(fields[i]?.attributes[2]?.value == "total"){
+        
+        num = Number(fields[i].firstChild.innerText.toString())
+ 
+        sum = sum + num
+       // console.log(fields[i].attributes[2].value)
+      }
+    }
+
+    setSumarize(sum)
   }
 
   return(
@@ -225,6 +244,11 @@ function Home() {
             checkboxSelection
       
           />
+          <div id='calculate-total'>
+            <Button variant="contained" color="success" onClick={sumarizeTotal}>Calcular total</Button>
+            <h3>Resultado: {sumarize}</h3>
+          </div>
+          
           <div id='button-container'>
             <Button variant="contained" onClick={previusPage} disabled={numberOfPagination <= 0 ? true : false}>Anterior</Button>
             <Button variant="contained" onClick={nextPage} disabled={numberOfPagination >= 4 ? true : false}>Próximo</Button>
