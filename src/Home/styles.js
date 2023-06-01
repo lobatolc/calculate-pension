@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { styled as materialStyled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { DataGrid } from '@mui/x-data-grid';
+import { NoEncryption } from '@mui/icons-material';
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -10,6 +11,13 @@ export const Container = styled.div`
     
     height: fit-content;
 
+    @media print {
+        
+        .none-print{
+            display: none;
+        }
+      
+      }
 
     #card-grid{
         width: 100%;
@@ -32,6 +40,14 @@ export const Container = styled.div`
         display: flex;
         gap: 1rem;
         justify-content: flex-end;
+
+        @media print {
+        
+       
+
+            display: none;
+        
+      }
     }
 
     #input-initial-value{
@@ -77,6 +93,20 @@ export const Container = styled.div`
         }
     }
 
+    #calculate-total{
+ 
+        display: flex;
+        justify-content: space-between;
+        @media print {
+        
+       
+
+                display: none;
+            
+          }
+       
+    }
+
     
 `;
 
@@ -97,6 +127,15 @@ const DataGridPaginationStyle = materialStyled(DataGrid)(({ theme}) => ({
     '& .css-zylse7-MuiButtonBase-root-MuiIconButton-root': {
         display: 'none !important',
       },
+
+      '& .css-1omnuql-MuiDataGrid-root': {
+        backgroundColor: "red",
+      },
+      '& .MuiDataGrid-columnHeader': {
+        backgroundColor: "#c8e6c9",
+      
+      },
+
   }));
 
   export function DataGridPagination({rows, columns, page, pageSize}){

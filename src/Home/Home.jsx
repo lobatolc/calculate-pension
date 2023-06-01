@@ -18,7 +18,7 @@ function Home() {
   const [isLocked, setIsLocked] = useState(true) 
   const [numberOfPagination, setNumberOfPagination] = useState(0)
   const [sumarize, setSumarize] = useState('')
-
+  const [pageSize, setPageSize] = useState(12)
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'year', headerName: 'Ano', width: 70 },
@@ -124,6 +124,23 @@ function Home() {
     { id: 52, year:2023, month: 'Abril', monetaryCorrection: 1 },
   ];
 
+  useEffect(()=>{
+
+    if(pageSize == 52){
+      
+      setTimeout(() => {
+        window.print();
+      }, "2000");
+      setTimeout(() => {
+        teste()
+      }, "2000");
+      
+    }
+  }, [pageSize])
+
+  function teste(){
+    setPageSize(12)
+  }
   function handleInitialValue(e){
     setValueInitial(e.target.value)
   }
@@ -178,10 +195,17 @@ function Home() {
     setSumarize(sum.toFixed(2))
   }
 
+  function changePageSize(){  
+    setPageSize(52)
+
+  } 
+
+  
+
   return(
     <Container>
-      <h1>CALCULADOR DE PENSÃO</h1>
-      <div id='input-initial-value'>
+      <h1 className='none-print'>CALCULADOR DE PENSÃO</h1>
+      <div className='none-print' id='input-initial-value'>
         <h2>Entradas</h2>
         <div id='input-container'>
         <FormControl fullWidth sx={{ m: 1 }}>
@@ -240,23 +264,28 @@ function Home() {
             rows={rows}
             columns={columns}
             page={numberOfPagination}
-            pageSize={12}
+            pageSize={pageSize}
             checkboxSelection
       
           />
-          <div id='calculate-total'>
-            <Button variant="contained" color="success" onClick={sumarizeTotal}>Calcular total</Button>
-            <h3>Resultado: {sumarize}</h3>
+          <div className='none-print' id='calculate-total'>
+         
+              <Button variant="contained" color="success" onClick={sumarizeTotal}>Calcular total</Button>
+              
+         
+            
+              <Button variant="contained" color="secondary" onClick={changePageSize}>Imprimir Tudo</Button>
           </div>
+          <h3>Total R$: {sumarize}</h3>
           
-          <div id='button-container'>
+          <div className='none-print' id='button-container'>
             <Button variant="contained" onClick={previusPage} disabled={numberOfPagination <= 0 ? true : false}>Anterior</Button>
             <Button variant="contained" onClick={nextPage} disabled={numberOfPagination >= 4 ? true : false}>Próximo</Button>
           </div>
           
         </div>  
       </div>
-      <div id='author-container'>
+      <div  className='none-print' id='author-container'>
         <p>Criado por <a href="https://github.com/lobatolc" target='_blank'>@lobatolc</a></p>
       </div>
   
